@@ -21,7 +21,7 @@ export function Welcome() {
 	};
 
 	return (
-		<main className="grid grid-cols-[max-content_1fr] justify-start m-4 h-full overflow-hidden">
+		<main className="grid grid-cols-[max-content_1fr] justify-start m-4 min-h-full">
 			<Header
 				className="text-3xl flex flex-col gap-4"
 				currentAct={currentAct}

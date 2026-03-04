@@ -64,11 +64,11 @@ export function Acts({ className, act }: ActsProps) {
 
     return (
         <div className={className}>
-            <div className="mx-16 text-xl grid grid-cols-[max-content_minmax(0,1fr)] gap-x-10 overflow-hidden">
-                <ol className="list-decimal">
-                    <div className="mb-2 font-bold text-2xl">Steps:</div>
+            <div className="mx-4 lg:mx-16 text-base lg:text-xl grid grid-cols-1 lg:grid-cols-[max-content_minmax(0,1fr)] gap-x-4 lg:gap-x-10">
+                <ol className="list-decimal order-2 lg:order-1">
+                    <div className="mb-2 font-bold text-xl lg:text-2xl">Steps:</div>
                     {steps.map((step) => (
-                        <li className="pl-2 pb-1" key={step}>
+                        <li className="pl-2 pb-1 wrap-break-word max-w-[55vw]" key={step}>
                             {formatter(step)}
                         </li>
                     ))}
@@ -77,9 +77,9 @@ export function Acts({ className, act }: ActsProps) {
                     </div>}
                 </ol>
 
-                <div className="min-w-0 overflow-hidden">
+                <div className="min-w-0 order-1 lg:order-2">
                     <div className="flex items-center gap-4 mb-2">
-                        <span className="font-bold text-2xl">Notes:</span>
+                        <span className="font-bold text-xl lg:text-2xl">Notes:</span>
                         <button
                             onClick={isEditing ? handleSave : handleEdit}
                             className="text-sm px-3 py-0.5 rounded border border-current opacity-70 hover:opacity-100 transition-opacity"
@@ -105,7 +105,7 @@ export function Acts({ className, act }: ActsProps) {
                         </div>
                     ) : (
                         hasNotes && (
-                            <ul>
+                            <ul className="list-disc list-outside ml-6">
                                 {actNotes.map((note) => (
                                     <li className="pl-2 pb-0.5" key={note}>
                                         {formatter(note)}
