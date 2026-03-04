@@ -17,7 +17,11 @@ try {
     execSync('git push', { stdio: 'inherit' });
 
     console.log('Successfully deployed and pushed!');
-} catch (error) {
-    console.error('Error occurred:', error.message);
+} catch (error: unknown) {
+    if (error instanceof Error) {
+        console.error('Error occurred:', error.message);
+    } else {
+        console.error('Error occurred:', error);
+    }
     process.exit(1);
 }

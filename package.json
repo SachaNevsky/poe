@@ -9,7 +9,7 @@
     "typecheck": "react-router typegen && tsc",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build/client",
-    "push": "node scripts/push.js"
+    "push": "node scripts/push.ts"
   },
   "homepage": "https://sachanevsky.github.io/poe",
   "dependencies": {
