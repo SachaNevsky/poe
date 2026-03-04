@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import guide from "../guide.json";
 import { formatter } from "../utils/formatter";
 
@@ -30,10 +30,11 @@ export function Acts({ className, act }: ActsProps) {
     const image = curAct.image;
 
     const [allNotes, setAllNotes] = useState<NotesStorage>(loadNotes);
+    const [actNotes, setActNotes] = useState(allNotes[String(act)] ?? []);
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState("");
+    const isClearing = useRef(false);
 
-    const actNotes: string[] = allNotes[String(act)] ?? [];
     const hasNotes = actNotes.length > 0 && actNotes.some((n) => n.trim() !== "");
 
     useEffect(() => {
@@ -41,6 +42,18 @@ export function Acts({ className, act }: ActsProps) {
             setEditText(actNotes.join("\n"));
         }
     }, [isEditing, act]);
+
+    useEffect(() => {
+        if (isClearing.current) {
+            setActNotes(allNotes[String(act)] ?? []);
+            isClearing.current = false;
+        }
+    }, [actNotes]);
+
+    useEffect(() => {
+        isClearing.current = true;
+        setActNotes([]);
+    }, [act]);
 
     useEffect(() => {
         setIsEditing(false);
@@ -59,6 +72,7 @@ export function Acts({ className, act }: ActsProps) {
         const updated: NotesStorage = { ...allNotes, [String(act)]: lines };
         setAllNotes(updated);
         saveNotes(updated);
+        setActNotes(lines);
         setIsEditing(false);
     }
 
