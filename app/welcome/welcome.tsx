@@ -21,9 +21,9 @@ export function Welcome() {
 	};
 
 	return (
-		<main className="grid grid-cols-[max-content_1fr] justify-start mx-1 lg:mx-4 my-1 lg:my-4 min-h-full">
+		<main className="lg:grid lg:grid-cols-[max-content_1fr] justify-start mx-1 lg:mx-4 my-2 lg:my-4 min-h-full">
 			<Header
-				className="text-3xl flex flex-col gap-4"
+				className="lg:text-3xl flex lg:flex-col lg:gap-4 pb-2 lg:pb-0"
 				currentAct={currentAct}
 				handleClick={handleClick}
 			/>

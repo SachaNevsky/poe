@@ -64,11 +64,11 @@ export function Acts({ className, act }: ActsProps) {
 
     return (
         <div className={className}>
-            <div className="mx-4 lg:mx-16 text-base lg:text-xl grid grid-cols-1 lg:grid-cols-[max-content_minmax(0,1fr)] gap-x-4 lg:gap-x-10">
+            <div className="ml-8 mr-4 lg:mx-16 text-base lg:text-xl grid grid-cols-1 lg:grid-cols-[max-content_minmax(0,1fr)] gap-x-4 lg:gap-x-10">
                 <ol className="list-decimal order-2 lg:order-1">
                     <div className="mb-2 font-bold text-xl lg:text-2xl">Steps:</div>
                     {steps.map((step) => (
-                        <li className="pl-2 pb-1 wrap-break-word max-w-[55vw]" key={step}>
+                        <li className="pl-2 pb-1 wrap-break-word max-w-full lg:max-w-[55vw]" key={step}>
                             {formatter(step)}
                         </li>
                     ))}
