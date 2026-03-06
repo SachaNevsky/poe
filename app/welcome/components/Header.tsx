@@ -5,7 +5,7 @@ interface HeaderProps {
 }
 
 export function Header({ className, currentAct, handleClick }: HeaderProps) {
-    const acts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const acts: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
         <div className={`${className} w-full lg:w-auto lg:mx-4`}>

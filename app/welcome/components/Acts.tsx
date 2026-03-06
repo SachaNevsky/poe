@@ -8,11 +8,11 @@ interface ActsProps {
 }
 
 type NotesStorage = Record<string, string[]>;
-const STORAGE_KEY = "act_notes";
+const STORAGE_KEY: string = "act_notes";
 
 function loadNotes(): NotesStorage {
     try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        const raw: string | null = localStorage.getItem(STORAGE_KEY);
         if (raw) return JSON.parse(raw);
     } catch { }
     return Object.fromEntries(
@@ -20,23 +20,23 @@ function loadNotes(): NotesStorage {
     );
 }
 
-function saveNotes(notes: NotesStorage) {
+function saveNotes(notes: NotesStorage): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
 }
 
 export function Acts({ className, act }: ActsProps) {
-    const curAct = guide[act as unknown as keyof typeof guide]
-    const steps = curAct.steps;
-    const image = curAct.image;
+    const curAct: { steps: string[]; image: boolean } = guide[act as unknown as keyof typeof guide]
+    const steps: string[] = curAct.steps;
+    const image: boolean = curAct.image;
 
     const [allNotes, setAllNotes] = useState<NotesStorage>(loadNotes);
-    const [actNotes, setActNotes] = useState(allNotes[String(act)] ?? []);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editText, setEditText] = useState("");
-    const isClearing = useRef(false);
+    const [actNotes, setActNotes] = useState<string[]>(allNotes[String(act)] ?? []);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [editText, setEditText] = useState<string>("");
+    const isClearing = useRef<boolean>(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    const hasNotes = actNotes.length > 0 && actNotes.some((n) => n.trim() !== "");
+    const hasNotes: boolean = actNotes.length > 0 && actNotes.some((n) => n.trim() !== "");
 
     useEffect(() => {
         if (isEditing) {
@@ -60,13 +60,13 @@ export function Acts({ className, act }: ActsProps) {
         setIsEditing(false);
     }, [act]);
 
-    function handleEdit() {
+    function handleEdit(): void {
         setEditText(actNotes.join("\n"));
         setIsEditing(true);
     }
 
-    function handleSave() {
-        const lines = editText
+    function handleSave(): void {
+        const lines: string[] = editText
             .split("\n")
             .map((l) => l.trim())
             .filter((l) => l !== "");
@@ -78,14 +78,14 @@ export function Acts({ className, act }: ActsProps) {
     }
 
     function addFormatting(format: string): void {
-        const textarea = textareaRef.current;
+        const textarea: HTMLTextAreaElement | null = textareaRef.current;
         if (!textarea) return;
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const insertion = `<${format}></${format}>`;
-        const newText = editText.slice(0, start) + insertion + editText.slice(end);
+        const start: number = textarea.selectionStart;
+        const end: number = textarea.selectionEnd;
+        const insertion: string = `<${format}></${format}>`;
+        const newText: string = editText.slice(0, start) + insertion + editText.slice(end);
         setEditText(newText);
-        const cursorPos = start + `<${format}>`.length;
+        const cursorPos: number = start + `<${format}>`.length;
         requestAnimationFrame(() => {
             textarea.selectionStart = cursorPos;
             textarea.selectionEnd = cursorPos;

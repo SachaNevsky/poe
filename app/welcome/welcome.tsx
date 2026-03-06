@@ -8,8 +8,8 @@ export function Welcome() {
 	const [currentAct, setCurrentAct] = useState<number>(1);
 
 	useEffect(() => {
-		const stored = localStorage.getItem(ACT_STORAGE_KEY);
-		const parsed = Number(stored);
+		const stored: string | null = localStorage.getItem(ACT_STORAGE_KEY);
+		const parsed: number = Number(stored);
 		if (Number.isInteger(parsed) && parsed > 0) {
 			setCurrentAct(parsed);
 		}

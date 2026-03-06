@@ -14,10 +14,10 @@ const formatMap: FormatMap = {
 };
 
 export function formatter(text: string): React.ReactNode {
-    const regex = /<(\w+)>(.*?)<\/\1>/g;
+    const regex: RegExp = /<(\w+)>(.*?)<\/\1>/g;
 
     const parts: React.ReactNode[] = [];
-    let lastIndex = 0;
+    let lastIndex: number = 0;
     let match: RegExpExecArray | null;
 
     while ((match = regex.exec(text)) !== null) {
@@ -27,7 +27,7 @@ export function formatter(text: string): React.ReactNode {
             parts.push(text.slice(lastIndex, match.index));
         }
 
-        const className = formatMap[tag];
+        const className: string = formatMap[tag];
         if (className) {
             parts.push(
                 <span key={match.index} className={className} >
