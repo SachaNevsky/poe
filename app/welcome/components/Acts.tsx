@@ -34,6 +34,7 @@ export function Acts({ className, act }: ActsProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState("");
     const isClearing = useRef(false);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const hasNotes = actNotes.length > 0 && actNotes.some((n) => n.trim() !== "");
 
@@ -76,6 +77,22 @@ export function Acts({ className, act }: ActsProps) {
         setIsEditing(false);
     }
 
+    function addFormatting(format: string): void {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const insertion = `<${format}></${format}>`;
+        const newText = editText.slice(0, start) + insertion + editText.slice(end);
+        setEditText(newText);
+        const cursorPos = start + `<${format}>`.length;
+        requestAnimationFrame(() => {
+            textarea.selectionStart = cursorPos;
+            textarea.selectionEnd = cursorPos;
+            textarea.focus();
+        });
+    }
+
     return (
         <div className={className}>
             <div className="ml-8 mr-4 lg:mx-16 text-base lg:text-xl grid grid-cols-1 lg:grid-cols-[max-content_minmax(0,1fr)] gap-x-4 lg:gap-x-10">
@@ -103,19 +120,32 @@ export function Acts({ className, act }: ActsProps) {
                     </div>
 
                     {isEditing ? (
-                        <div className="relative w-full">
-                            <div
-                                className="invisible whitespace-pre-wrap wrap-break-word w-full text-base p-2 border"
-                                style={{ minHeight: "2rem" }}
-                            >
-                                {editText + "\n"}
+                        <div className="flex flex-col border border-current rounded w-full text-base">
+                            <div className="flex flex-row gap-2 p-2 border-b border-current ">
+                                <button onClick={() => addFormatting("blue")} className="px-3 py-1 rounded font-semibold bg-blue-500">Blue</button>
+                                <button onClick={() => addFormatting("red")} className="px-3 py-1 rounded font-semibold bg-red-600">Red</button>
+                                <button onClick={() => addFormatting("green")} className="px-3 py-1 rounded font-semibold bg-green-500">Green</button>
+                                <button onClick={() => addFormatting("b")} className="px-3 py-1 rounded font-semibold bg-gray-100 text-black">Bold</button>
+                                <button onClick={() => addFormatting("name")} className="px-3 py-1 rounded font-semibold bg-yellow-200 text-black">Yellow</button>
+                                <button onClick={() => addFormatting("orange")} className="px-3 py-1 rounded font-semibold bg-orange-500 text-black">Orange</button>
+                                <button onClick={() => addFormatting("item")} className="px-3 py-1 rounded font-semibold bg-green-400 text-black">Item</button>
+                                <button onClick={() => addFormatting("pink")} className="px-3 py-1 rounded font-semibold bg-pink-500 text-black">Pink</button>
                             </div>
-                            <textarea
-                                className="absolute inset-0 w-full h-full bg-transparent border border-current rounded p-2 text-base opacity-90 focus:opacity-100 outline-none resize-none overflow-hidden"
-                                value={editText}
-                                onChange={(e) => setEditText(e.target.value)}
-                                placeholder="Enter notes here"
-                            />
+                            <div className="relative w-full">
+                                <div
+                                    className="invisible whitespace-pre-wrap wrap-break-word w-full p-2"
+                                    style={{ minHeight: "4rem" }}
+                                >
+                                    {editText + "\n"}
+                                </div>
+                                <textarea
+                                    ref={textareaRef}
+                                    className="absolute inset-0 w-full h-full bg-transparent p-2 text-base opacity-90 focus:opacity-100 outline-none resize-none overflow-hidden"
+                                    value={editText}
+                                    onChange={(e) => setEditText(e.target.value)}
+                                    placeholder="Enter notes here"
+                                />
+                            </div>
                         </div>
                     ) : (
                         hasNotes && (
