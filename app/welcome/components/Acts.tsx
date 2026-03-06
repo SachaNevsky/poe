@@ -130,6 +130,7 @@ export function Acts({ className, act }: ActsProps) {
                                 <button onClick={() => addFormatting("orange")} className="px-3 py-1 rounded font-semibold bg-orange-500 text-black">Orange</button>
                                 <button onClick={() => addFormatting("item")} className="px-3 py-1 rounded font-semibold bg-green-400 text-black">Item</button>
                                 <button onClick={() => addFormatting("pink")} className="px-3 py-1 rounded font-semibold bg-pink-500 text-black">Pink</button>
+                                <button onClick={() => addFormatting("i")} className="px-3 py-1 rounded font-semibold bg-gray-100 text-black italic">Italic</button>
                             </div>
                             <div className="relative w-full">
                                 <div

@@ -10,7 +10,8 @@ const formatMap: FormatMap = {
     name: "font-medium text-yellow-200",
     orange: "font-medium text-orange-500",
     item: "font-medium text-green-400",
-    pink: "font-medium text-pink-500"
+    pink: "font-medium text-pink-500",
+    i: "italic"
 };
 
 export function formatter(text: string): React.ReactNode {
