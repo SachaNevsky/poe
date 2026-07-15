@@ -1,3 +1,5 @@
+// ./app/welcome/components/Header.tsx
+
 interface HeaderProps {
     className: string;
     currentAct: number;

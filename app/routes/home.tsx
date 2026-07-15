@@ -1,3 +1,5 @@
+// ./app/routes/home.tsx
+
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
 

@@ -1,3 +1,5 @@
+// ./app/welcome/utils/formatter.tsx
+
 import React from "react";
 
 type FormatMap = Record<string, string>;
