@@ -16,22 +16,58 @@ const formatMap: FormatMap = {
     i: "italic"
 };
 
+const faIconMap: FormatMap = {
+    quest: "fa-solid fa-exclamation",
+    buy: "fa-solid fa-dollar-sign",
+    kill: "fa-solid fa-skull"
+};
+
+const imageIconMap: FormatMap = {
+    wisdom: "wisdom.png",
+    transmutation: "transmutation.png",
+    alteration: "alteration.png",
+    chance: "chance.png",
+    alchemy: "alchemy.png"
+};
+
 export function formatter(text: string): React.ReactNode {
-    const regex: RegExp = /<(\w+)>(.*?)<\/\1>/g;
+    const regex: RegExp = /<(\w+)\/>|<(\w+)>(.*?)<\/\2>/g;
 
     const parts: React.ReactNode[] = [];
     let lastIndex: number = 0;
     let match: RegExpExecArray | null;
 
     while ((match = regex.exec(text)) !== null) {
-        const [fullMatch, tag, content] = match;
+        const fullMatch: string = match[0];
+        const tag: string = match[1] ?? match[2];
+        const content: string = match[3] ?? "";
 
         if (match.index > lastIndex) {
             parts.push(text.slice(lastIndex, match.index));
         }
 
+        const faIconClass: string = faIconMap[tag];
+        const imageSrc: string = imageIconMap[tag];
         const className: string = formatMap[tag];
-        if (className) {
+
+        if (faIconClass) {
+            parts.push(
+                <i
+                    key={match.index}
+                    className={`${faIconClass} mx-1`}
+                    style={{ color: "gold", fontSize: "1.25em" }}
+                />
+            );
+        } else if (imageSrc) {
+            parts.push(
+                <img
+                    key={match.index}
+                    src={imageSrc}
+                    alt={tag}
+                    className="inline-block h-[1.25em] w-auto align-middle mx-1"
+                />
+            );
+        } else if (className) {
             parts.push(
                 <span key={match.index} className={className} >
                     {content}

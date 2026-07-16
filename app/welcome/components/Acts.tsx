@@ -33,7 +33,7 @@ function loadBuilds(): Build[] {
         if (raw) {
             const parsed: Build[] = JSON.parse(raw);
             if (Array.isArray(parsed) && parsed.length === NUM_BUILDS) {
-                return parsed.map((b) => ({ ...b, regex: "" }));
+                return parsed.map((b) => ({ ...b, regex: b.regex ?? "" }));
             }
         }
     } catch { }
@@ -130,6 +130,22 @@ export function Acts({ className, act }: ActsProps) {
         });
     }
 
+    function insertIcon(tag: string): void {
+        const textarea: HTMLTextAreaElement | null = textareaRef.current;
+        if (!textarea) return;
+        const start: number = textarea.selectionStart;
+        const end: number = textarea.selectionEnd;
+        const insertion: string = `<${tag}/>`;
+        const newText: string = editText.slice(0, start) + insertion + editText.slice(end);
+        setEditText(newText);
+        const cursorPos: number = start + insertion.length;
+        requestAnimationFrame(() => {
+            textarea.selectionStart = cursorPos;
+            textarea.selectionEnd = cursorPos;
+            textarea.focus();
+        });
+    }
+
     return (
         <div className={className}>
             <div className="ml-8 mr-4 lg:mx-16 text-base lg:text-xl grid grid-cols-1 lg:grid-cols-[max-content_minmax(0,1fr)] gap-x-4 lg:gap-x-10">
@@ -186,7 +202,7 @@ export function Acts({ className, act }: ActsProps) {
                                     className="flex-1 min-w-0 bg-transparent outline-none font-mono text-sm px-1 border-l border-current"
                                 />
                             </div>
-                            <div className="flex flex-row gap-2 p-2 border-b border-current ">
+                            <div className="flex flex-row items-center gap-2 p-2 border-b border-current flex-wrap">
                                 <button onClick={() => addFormatting("blue")} className="px-3 py-1 rounded font-semibold bg-blue-500">Blue</button>
                                 <button onClick={() => addFormatting("red")} className="px-3 py-1 rounded font-semibold bg-red-600">Red</button>
                                 <button onClick={() => addFormatting("green")} className="px-3 py-1 rounded font-semibold bg-green-500">Green</button>
@@ -196,6 +212,33 @@ export function Acts({ className, act }: ActsProps) {
                                 <button onClick={() => addFormatting("item")} className="px-3 py-1 rounded font-semibold bg-green-400 text-black">Item</button>
                                 <button onClick={() => addFormatting("pink")} className="px-3 py-1 rounded font-semibold bg-pink-500 text-black">Pink</button>
                                 <button onClick={() => addFormatting("i")} className="px-3 py-1 rounded font-semibold bg-gray-100 text-black italic">Italic</button>
+
+                                <div className="w-px self-stretch bg-current/40 mx-1" />
+
+                                <button onClick={() => insertIcon("quest")} title="Quest" className="px-2.5 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <i className="fa-solid fa-exclamation" style={{ color: "gold", fontSize: "1.25em" }} />
+                                </button>
+                                <button onClick={() => insertIcon("buy")} title="Buy" className="px-2.5 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <i className="fa-solid fa-dollar-sign" style={{ color: "gold", fontSize: "1.25em" }} />
+                                </button>
+                                <button onClick={() => insertIcon("kill")} title="Kill" className="px-2.5 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <i className="fa-solid fa-skull" style={{ color: "gold", fontSize: "1.25em" }} />
+                                </button>
+                                <button onClick={() => insertIcon("wisdom")} title="Wisdom" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <img src="wisdom.png" alt="Wisdom" className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => insertIcon("transmutation")} title="Transmutation" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <img src="transmutation.png" alt="Transmutation" className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => insertIcon("alteration")} title="Alteration" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <img src="alteration.png" alt="Alteration" className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => insertIcon("chance")} title="Chance" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <img src="chance.png" alt="Chance" className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => insertIcon("alchemy")} title="Alchemy" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <img src="alchemy.png" alt="Alchemy" className="h-4 w-4" />
+                                </button>
                             </div>
                             <div className="relative w-full">
                                 <div
