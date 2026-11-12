@@ -230,6 +230,9 @@ export function Acts({ className, act }: ActsProps) {
                                 <button onClick={() => insertIcon("transmutation")} title="Transmutation" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
                                     <img src="transmutation.png" alt="Transmutation" className="h-4 w-4" />
                                 </button>
+                                <button onClick={() => insertIcon("augmentation")} title="Augmentation" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
+                                    <img src="augmentation.png" alt="Augmentation" className="h-4 w-4" />
+                                </button>
                                 <button onClick={() => insertIcon("alteration")} title="Alteration" className="px-2 py-1 rounded bg-transparent hover:bg-white/10 transition-colors flex items-center justify-center">
                                     <img src="alteration.png" alt="Alteration" className="h-4 w-4" />
                                 </button>

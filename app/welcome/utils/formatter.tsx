@@ -26,8 +26,9 @@ const imageIconMap: FormatMap = {
     wisdom: "wisdom.png",
     transmutation: "transmutation.png",
     alteration: "alteration.png",
+    augmentation: "augmentation.png",
     chance: "chance.png",
-    alchemy: "alchemy.png"
+    alchemy: "alchemy.png",
 };
 
 export function formatter(text: string): React.ReactNode {

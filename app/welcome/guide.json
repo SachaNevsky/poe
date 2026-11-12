@@ -13,6 +13,7 @@
             "Take <blue>Waypoint</blue> to the <orange>Lioneye's Watch</orange>.",
             "Talk to <pink>Tarkleigh</pink> for <item>Book of Skill</item>, talk to <pink>Nessa</pink> for gem reward, then take <blue>Waypoint</blue> to <name>Lower Prison</name>.",
             "Find the <item>Labyrinth Trial</item>, then exit to <name>Upper Prison</name>.",
+            "[Optional] Find the <item>Chemist's Strongbox</item> (switch nearby) for a likely <green>Quicksilver Flask</green>.",
             "Exit to the <name>Warden's Quarters</name>.",
             "Kill <red>Brutus</red> then <orange>logout</orange>.",
             "Talk to <pink>Tarkleigh</pink> to receive gem reward.",
@@ -125,8 +126,8 @@
         "steps": [
             "Clear <name>Twilight Strand</name>, then <orange>logout</orange>, talk to <pink>Lilly Roth</pink>.",
             "Enter <name>The Coast</name>, grab <blue>Waypoint</blue>, enter <name>Mud Flats</name>.",
-            "Kill <red>The Dishonored Queen</red>, loot <item>Eye of Conquest</item>, enter <name>Karui Fortress</name>, then <name>Tukohama's Keep</name>.",
-            "Kill <red>Tukohama</red>.",
+            "Kill <red>The Dishonored Queen</red>, loot <item>Eye of Conquest</item>, enter <name>Karui Fortress</name>, turn left for free <item>tattoo</item>.",
+            "Go to <name>Tukohama's Keep</name> and kill <red>Tukohama</red>.",
             "Enter <name>The Ridge</name>, grab <blue>Waypoint</blue>.",
             "Enter <name>Lower Prison</name>, grab <blue>Waypoint</blue>, complete <item>Labyrinth Trial</item>.",
             "Enter <name>Shavronne's Tower</name>, ascend to <name>Prison Rooftop</name>, kill <red>Brutus</red> and <red>Shavronne</red>.",
